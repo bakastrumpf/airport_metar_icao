@@ -1,6 +1,7 @@
 package com.esys.airMetarIcao.controllers;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -21,14 +22,16 @@ public class AirportController {
 		return "prvi aerodrom";
 	}
 	
+	List<AirportEntity> airports = new ArrayList<AirportEntity>();
+	
 	private List<AirportEntity> getDB(){
-		List<AirportEntity> airports = new ArrayList<AirportEntity>();
+		if(airports.size()==0) {
 		airports.add(new AirportEntity(1, "Nikola Tesla", "Beograd", "LYBE"));
 		airports.add(new AirportEntity(2, "Maksimir", "Zagreb", "LDDD"));
 		airports.add(new AirportEntity(3, "International", "Frankfurt", "EDDF"));
 		airports.add(new AirportEntity(4, "Schipol Airport", "Amsterdam", "EHAM"));
+		}
 		return airports;
-		
 	}
 	
 	// TODO GET vrati sve aerodrome iz baze
@@ -76,14 +79,38 @@ public class AirportController {
 	
 	
 	// TODO DELETE izbriši aerodrom /po id, po icao, po gradu/
+	@RequestMapping(method = RequestMethod.DELETE, value = "/b/{id}")
 	public AirportEntity deleteAirport (@PathVariable Integer id) {
 		List<AirportEntity> airports = getDB();
-		AirportEntity ae = getDB().stream().filter(x -> x.getId().equals(id)).findFirst().get();
-		if (ae != null) {
-			airports.remove(ae);
+		Iterator<AirportEntity> iae = airports.iterator();
+		//AirportEntity ae = getDB().stream().filter(x -> x.getId().equals(id)).findFirst().get();
+		//for(AirportEntity ae : airports) {
+		//if (ae != null) {
+		//if(ae.getId().equals(id)) {
+		//	airports.remove(ae);
+		while(iae.hasNext()) {
+			AirportEntity ae = iae.next();
+			if(ae.getId().equals(id)) {
+				iae.remove();
 			return ae;
+			}
 		}
 		return null;
-				
+	}
+	
+	// TODO pretraga aerodroma po prvom slovu
+	@RequestMapping(method = RequestMethod.GET, value = "/airports/{firstLetter}")
+	public List<String> startsWith(@PathVariable String firstLetter){
+		//pravi se povratna lista
+		List<String> retStr = new ArrayList<String>();
+		//prolazi kroz sve aerodrome
+		for(AirportEntity ae : getDB()) {
+			//ako ime nekog aerodroma počinje tim slovom stavlja ga u listu
+			if(ae.getName().startsWith(firstLetter)) {
+				retStr.add(ae.getName());
+			}
+		}
+		return retStr;
+		
 	}
 }
