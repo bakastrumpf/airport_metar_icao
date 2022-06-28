@@ -10,33 +10,29 @@ import javax.persistence.Table;
 @Entity
 @Table
 
-public class AirportEntity {
+public class IcaoEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "airport_id")
+	@Column(name = "code_id")
 	private Integer id;
 	
-	@Column(name = "name")
-	private String name;
-	
-	@Column(name = "city")
+	@Column
 	private String city;
 	
-	@Column(name = "icao_code")
-	private String icao;
+	@Column
+	private String code;
 
-	public AirportEntity() {
+	public IcaoEntity() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public AirportEntity(Integer id, String name, String city, String icao) {
+	public IcaoEntity(Integer id, String city, String code) {
 		super();
 		this.id = id;
-		this.name = name;
 		this.city = city;
-		this.icao = icao;
+		this.code = code;
 	}
 
 	public Integer getId() {
@@ -47,14 +43,6 @@ public class AirportEntity {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public String getCity() {
 		return city;
 	}
@@ -63,13 +51,14 @@ public class AirportEntity {
 		this.city = city;
 	}
 
-	public String getIcao() {
-		return icao;
+	public String getCode() {
+		return code;
 	}
 
-	public void setIcao(String icao) {
-		this.icao = icao;
+	public void setCode(String code) {
+		this.code = code;
 	}
-
 	
+	
+
 }
