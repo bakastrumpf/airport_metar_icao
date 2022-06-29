@@ -10,10 +10,10 @@ import com.esys.airMetarIcao.repositories.IcaoRepository;
 @RestController
 @RequestMapping(path = "/metars")
 public class MetarController {
-	
+
 	@Autowired
 	private AirportRepository airportRepository;
-	
+
 	@Autowired
 	private IcaoRepository icaoRepository;
 

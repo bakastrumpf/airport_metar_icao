@@ -21,22 +21,22 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table
 
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 
 public class AirportEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
+
 	@Column
 	private String name;
-	
+
 	@Column
 	private String city;
-	
+
 	@JsonIgnore
-	@OneToOne(mappedBy = "airport", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
+	@OneToOne(mappedBy = "airport", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST })
 	private IcaoEntity icao;
 
 	public AirportEntity() {
@@ -83,8 +83,5 @@ public class AirportEntity {
 	public void setIcao(IcaoEntity icao) {
 		this.icao = icao;
 	}
-
-	
-	
 
 }

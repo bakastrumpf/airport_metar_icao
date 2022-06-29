@@ -18,37 +18,28 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 //@Table
 @Entity
 
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 
 public class IcaoEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
-	//@JsonIgnore
-	
+
+	// @JsonIgnore
+
 	private String code;
-@OneToOne
-@JoinColumn(name="airport_id")
+	@OneToOne
+	@JoinColumn(name = "airport_id")
 	private AirportEntity airport;
-
-
-
 
 	@Column
 	private String city;
-
-
-
 
 	public IcaoEntity() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-
-
 
 	public IcaoEntity(Integer id, String code, AirportEntity airport, String city) {
 		super();
@@ -58,63 +49,36 @@ public class IcaoEntity {
 		this.city = city;
 	}
 
-
-
-
 	public Integer getId() {
 		return id;
 	}
-
-
-
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-
-
-
 	public String getCode() {
 		return code;
 	}
-
-
-
 
 	public void setCode(String code) {
 		this.code = code;
 	}
 
-
-
-
 	public AirportEntity getAirport() {
 		return airport;
 	}
-
-
-
 
 	public void setAirport(AirportEntity airport) {
 		this.airport = airport;
 	}
 
-
-
-
 	public String getCity() {
 		return city;
 	}
-
-
-
 
 	public void setCity(String city) {
 		this.city = city;
 	}
 
-	
-	
-	
 }

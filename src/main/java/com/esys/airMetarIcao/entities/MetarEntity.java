@@ -8,11 +8,11 @@ import javax.persistence.Id;
 @Entity
 
 public class MetarEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
+
 	private String weather;
 
 	public MetarEntity() {
@@ -41,7 +41,5 @@ public class MetarEntity {
 	public void setWeather(String weather) {
 		this.weather = weather;
 	}
-	
-	
 
 }
