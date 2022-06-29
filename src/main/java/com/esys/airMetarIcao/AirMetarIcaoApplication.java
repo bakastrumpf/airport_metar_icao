@@ -9,5 +9,5 @@ public class AirMetarIcaoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AirMetarIcaoApplication.class, args);
 	}
-
+	
 }

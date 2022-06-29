@@ -14,27 +14,35 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.esys.airMetarIcao.entities.AirportEntity;
 import com.esys.airMetarIcao.repositories.AirportRepository;
+import com.esys.airMetarIcao.repositories.IcaoRepository;
 
 @RestController
-@RequestMapping("/airports")
+@RequestMapping(path = "/airports")
 public class AirportController {
 	
 	@Autowired
 	private AirportRepository airportRepository;
-
+	
+	@Autowired
+	private IcaoRepository icaoRepository;
+	
 	@RequestMapping("/hello")
 	public String helloWorld() {
 		return "prvi aerodrom";
 	}
 	
 	List<AirportEntity> airports = new ArrayList<AirportEntity>();
-	
+
+
 	private List<AirportEntity> getDB(){
 		if(airports.size()==0) {
-		airports.add(new AirportEntity(1, "Nikola Tesla", "Beograd", "LYBE"));
+		airports.add(new AirportEntity());
+/*
 		airports.add(new AirportEntity(2, "Maksimir", "Zagreb", "LDDD"));
 		airports.add(new AirportEntity(3, "International", "Frankfurt", "EDDF"));
 		airports.add(new AirportEntity(4, "Schipol Airport", "Amsterdam", "EHAM"));
+		
+		*/
 		}
 		return airports;
 	}
