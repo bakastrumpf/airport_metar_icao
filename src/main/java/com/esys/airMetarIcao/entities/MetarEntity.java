@@ -12,18 +12,21 @@ public class MetarEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-
-	private String weather;
-
+	
+	private String icaoCode;
+	
+	private String data;
+		
 	public MetarEntity() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public MetarEntity(Integer id, String weather) {
+	public MetarEntity(Integer id, String icaoCode, String data) {
 		super();
 		this.id = id;
-		this.weather = weather;
+		this.icaoCode = icaoCode;
+		this.data = data;
 	}
 
 	public Integer getId() {
@@ -34,12 +37,20 @@ public class MetarEntity {
 		this.id = id;
 	}
 
-	public String getWeather() {
-		return weather;
+	public String getIcaoCode() {
+		return icaoCode;
 	}
 
-	public void setWeather(String weather) {
-		this.weather = weather;
+	public void setIcaoCode(String icaoCode) {
+		this.icaoCode = icaoCode;
+	}
+
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
 	}
 
 }

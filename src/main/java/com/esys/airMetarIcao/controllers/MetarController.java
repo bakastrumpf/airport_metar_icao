@@ -4,17 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.esys.airMetarIcao.repositories.AirportRepository;
-import com.esys.airMetarIcao.repositories.IcaoRepository;
+import com.esys.airMetarIcao.repositories.MetarRepository;
 
 @RestController
 @RequestMapping(path = "/metars")
 public class MetarController {
 
 	@Autowired
-	private AirportRepository airportRepository;
+	private MetarRepository metarRepository;
 
-	@Autowired
-	private IcaoRepository icaoRepository;
-
-}
+	}
