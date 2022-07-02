@@ -29,8 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.esys.airMetarIcao.entities.SubscriptionEntity;
 import com.esys.airMetarIcao.entities.dto.SubscriptionDTO;
 import com.esys.airMetarIcao.repositories.SubscriptionsRepository;
-
-import utils.SubscriptionCustomValidator;
+import com.esys.airMetarIcao.utils.SubscriptionCustomValidator;
 
 @RestController
 @RequestMapping(path = "/subscriptions")
