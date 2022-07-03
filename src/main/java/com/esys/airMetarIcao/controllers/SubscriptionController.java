@@ -38,7 +38,7 @@ public class SubscriptionController {
 	@Autowired
 	private SubscriptionsRepository repository;
 
-//	@Autowired
+	@Autowired
 	private SubscriptionCustomValidator subValidator;
 
 	@InitBinder
@@ -81,9 +81,9 @@ public class SubscriptionController {
 	}
 
 	// TODO post a new subscription
-	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<?> addNewSubscription(@Valid @RequestBody SubscriptionDTO newSubscription,
-			BindingResult result) {
+	@RequestMapping(method = RequestMethod.POST, path = "/")
+	public ResponseEntity<?> addNewSubscription
+	(@Valid @RequestBody SubscriptionDTO newSubscription, BindingResult result) {
 		if (result.hasErrors()) {
 			return new ResponseEntity<>(createErrorMessage(result), HttpStatus.BAD_REQUEST);
 		} else {

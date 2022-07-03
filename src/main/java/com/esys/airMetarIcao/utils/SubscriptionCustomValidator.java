@@ -1,10 +1,12 @@
 package com.esys.airMetarIcao.utils;
 
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import com.esys.airMetarIcao.entities.dto.SubscriptionDTO;
 
+@Component
 public class SubscriptionCustomValidator implements Validator {
 	
 	@Override
