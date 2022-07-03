@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.esys.airMetarIcao.entities.MetarEntity;
 import com.esys.airMetarIcao.entities.SubscriptionEntity;
 import com.esys.airMetarIcao.repositories.MetarRepository;
 
@@ -22,7 +23,7 @@ public class MetarController {
 
 	public static void readBashScript() {
 		try {
-			Process proc = Runtime.getRuntime().exec("/home/montekrista/metar-script.sh /"); 																							
+			Process proc = Runtime.getRuntime().exec("/home/montekrista/metar-script.sh/");
 			BufferedReader read = new BufferedReader(new InputStreamReader(proc.getInputStream()));
 			try {
 				proc.waitFor();
@@ -36,21 +37,11 @@ public class MetarController {
 			System.out.println(e.getMessage());
 		}
 	}
-	
-	@RequestMapping(method = RequestMethod.GET, value = "/")
-	public String getMetarData() {
-		
-		
-		return null; //metarData
-	}
-	
-	/*
-	 * @RequestMapping(value = "/", method = RequestMethod.GET)
-	public List<SubscriptionEntity> getAll() {
-		List<SubscriptionEntity> entities = (List<SubscriptionEntity>) repository.findAll();
-		return entities;
 
+	@RequestMapping(method = RequestMethod.GET, value = "/data")
+	public List<MetarEntity> getMetarData() {
+		List<MetarEntity> metarData = (List<MetarEntity>) metarRepository.findAll();
+		return metarData;
 	}
-	 */
 
 }

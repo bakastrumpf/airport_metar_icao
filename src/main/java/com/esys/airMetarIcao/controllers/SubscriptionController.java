@@ -48,7 +48,7 @@ public class SubscriptionController {
 
 	@RequestMapping("/hello")
 	public String helloWorld() {
-		return "prvi aerodrom";
+		return "test endpoint";
 	}
 
 	List<SubscriptionEntity> airports = new ArrayList<SubscriptionEntity>();
@@ -61,7 +61,7 @@ public class SubscriptionController {
 		return airports;
 	}
 
-	// TODO GET vrati sve subs iz baze
+	// TODO GET retrun all subscriptions from the DB
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public List<SubscriptionEntity> getAll() {
 		List<SubscriptionEntity> entities = (List<SubscriptionEntity>) repository.findAll();
@@ -69,7 +69,7 @@ public class SubscriptionController {
 
 	}
 
-	// TODO GET vrati 1 sub /airports/{id}
+	// TODO GET return 1 single subscription /airports/{id}
 	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
 	public List<SubscriptionEntity> getOne(@PathVariable Integer id) {
 		for (SubscriptionEntity se : getDB()) {
@@ -80,7 +80,7 @@ public class SubscriptionController {
 		return null;
 	}
 
-	// TODO new subscription
+	// TODO post a new subscription
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<?> addNewSubscription(@Valid @RequestBody SubscriptionDTO newSubscription,
 			BindingResult result) {
@@ -99,7 +99,7 @@ public class SubscriptionController {
 		return result.getAllErrors().stream().map(ObjectError::getDefaultMessage).collect(Collectors.joining(" "));
 	}
 
-	// TODO DELETE izbriši prijavu /po id/ soft del
+	// TODO DELETE delete subscription /by id/ soft delete
 	@RequestMapping(method = RequestMethod.DELETE, path = "/delete/{id}")
 	public ResponseEntity<SubscriptionEntity> delSub(@PathVariable Integer id) {
 		if (repository.findById(id) == null) {
