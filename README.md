@@ -23,3 +23,6 @@ for icaoCode in $icaoCodes; do
     echo $body
     $(curl -X POST -H "Content-Type: application/json" -d "$json" "http://localhost:8080/airport/$icaoCode/METAR")
 done
+
+
+finally, the commits '220703 | basic functionalities, DELETE endpoint returning 405 error,' have been fixed - the 405 error was non-existant. so things are okay.
