@@ -6,16 +6,21 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.esys.airMetarIcao.entities.MetarEntity;
 import com.esys.airMetarIcao.entities.SubscriptionEntity;
+import com.esys.airMetarIcao.entities.dto.MetarDTO;
 import com.esys.airMetarIcao.repositories.MetarRepository;
 
 @RestController
-@RequestMapping(path = "/metar")
+@RequestMapping(path = "/airport")
 public class MetarController {
 
 	@Autowired
@@ -44,4 +49,13 @@ public class MetarController {
 		return metarData;
 	}
 
+	@RequestMapping(method = RequestMethod.POST, value = "/{icaoCode}/METAR")
+	public ResponseEntity<?> saveMetarData(@PathVariable String icaoCode, @RequestBody MetarDTO metarDTO) {
+
+		MetarEntity metarEntity = new MetarEntity();
+		metarEntity.setData(metarDTO.getData());
+		metarEntity.setIcaoCode(icaoCode);
+		metarRepository.save(metarEntity);
+		return new ResponseEntity<>(metarDTO, HttpStatus.OK);
+	}
 }
