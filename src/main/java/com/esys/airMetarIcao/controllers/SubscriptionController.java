@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.esys.airMetarIcao.entities.SubscriptionEntity;
@@ -62,7 +63,7 @@ public class SubscriptionController {
 	}
 
 	// TODO GET retrun all subscriptions from the DB
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public List<SubscriptionEntity> getAll() {
 		List<SubscriptionEntity> entities = (List<SubscriptionEntity>) repository.findAll();
 		return entities;
@@ -82,8 +83,8 @@ public class SubscriptionController {
 
 	// TODO post a new subscription
 	@RequestMapping(method = RequestMethod.POST, path = "/")
-	public ResponseEntity<?> addNewSubscription
-	(@Valid @RequestBody SubscriptionDTO newSubscription, BindingResult result) {
+	public ResponseEntity<?> addNewSubscription(@Valid @RequestBody SubscriptionDTO newSubscription,
+			BindingResult result) {
 		if (result.hasErrors()) {
 			return new ResponseEntity<>(createErrorMessage(result), HttpStatus.BAD_REQUEST);
 		} else {
@@ -101,6 +102,7 @@ public class SubscriptionController {
 
 	// TODO DELETE delete subscription /by id/ soft delete
 	@RequestMapping(method = RequestMethod.DELETE, path = "/delete/{id}")
+	@ResponseBody
 	public ResponseEntity<SubscriptionEntity> delSub(@PathVariable Integer id) {
 		if (repository.findById(id) == null) {
 			throw new NoSuchElementException("Item doesn't exists or is already deleted!");
@@ -108,5 +110,18 @@ public class SubscriptionController {
 		repository.deleteById(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
+
+	/*
+	@RequestMapping(method = RequestMethod.DELETE, path = "/delete/{id}")
+	@ResponseBody
+	public ResponseEntity<SubscriptionEntity> delSub(@PathVariable Integer id) {
+		for (SubscriptionEntity se : getDB())
+		if (se.getId().equals(id)) {
+			getDB().remove(se);
+			return null;
+		}
+		return new ResponseEntity<SubscriptionEntity>(HttpStatus.OK);
+	}
+	*/
 
 }
